@@ -1,70 +1,270 @@
-# Getting Started with Create React App
+# 🏢 Sistema de Asistencias - Corporación R&L Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Descripción
 
-## Available Scripts
+Sistema web de control de asistencias para personal de empresa. Permite registrar entrada/salida, generar reportes y gestionar personal.
 
-In the project directory, you can run:
+**Stack:**
+- **Frontend:** React 19
+- **Backend:** Node.js + Express 5
+- **BD:** PostgreSQL
+- **Autenticación:** JWT
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Instalación Rápida
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1️⃣ Requisitos
+- Node.js 18+
+- PostgreSQL 12+
+- npm o yarn
 
-### `npm test`
+### 2️⃣ Clonar y configurar
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+# Clonar repo
+git clone <tu-repo>
+cd sistema_asistencias
 
-### `npm run build`
+# Configurar Backend
+cd backend
+cp .env.example .env
+# ⚠️ Editar .env con tus valores reales
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Configurar Frontend
+cd ../sistema
+cp .env.example .env
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3️⃣ Base de Datos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Crear base de datos
+createdb sistema
 
-### `npm run eject`
+# Inicializar tablas
+psql sistema -f backend/config/init.sql
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4️⃣ Iniciar servidores
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Terminal 1: Backend (Puerto 4000)
+cd backend
+npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Terminal 2: Frontend (Puerto 3000)
+cd sistema
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📚 Documentación
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Documento | Descripción |
+|-----------|-------------|
+| [SECURITY_IMPROVEMENTS.md](SECURITY_IMPROVEMENTS.md) | ✨ Todas las mejoras implementadas |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | 🚀 Guía de despliegue a producción |
+| [backend/SECURITY.md](backend/SECURITY.md) | 🛡️ Detalles de protecciones |
+| [backend/JWT_AUTH.md](backend/JWT_AUTH.md) | 🔑 Autenticación JWT |
+| [backend/TESTING.md](backend/TESTING.md) | 🧪 Testing y cobertura |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🔐 Seguridad Implementada
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+✅ **Variables de Entorno** - Sin credenciales en código  
+✅ **Validación de Input** - Protección contra SQL Injection  
+✅ **Autenticación JWT** - Control de acceso  
+✅ **CORS configurado** - Acceso restringido  
+✅ **Tests automatizados** - Cobertura de seguridad  
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📊 Credenciales por Defecto
 
-### Making a Progressive Web App
+```
+Usuario: admin
+Contraseña: [Editar en .env ADMIN_PASSWORD]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+⚠️ **CAMBIAR EN PRODUCCIÓN**
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🔄 Estructura de Carpetas
 
-### Deployment
+```
+sistema_asistencias/
+├── backend/
+│   ├── config/
+│   │   ├── database.js
+│   │   └── init.sql
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── asistenciaController.js
+│   │   └── personalController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   └── validation.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── personal.js
+│   │   └── asistencias.js
+│   ├── __tests__/
+│   │   └── (test cases)
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package.json
+│   └── index.js
+├── sistema/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Login.js
+│   │   │   ├── Asistencia.js
+│   │   │   └── ...
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   └── App.js
+│   ├── .env.example
+│   ├── .gitignore
+│   └── package.json
+├── SECURITY_IMPROVEMENTS.md
+├── DEPLOYMENT.md
+└── .gitignore
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🧪 Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Ver cobertura
+npm run test:coverage
+
+# Modo watch
+npm run test:watch
+```
+
+**Coverage actual:** 25+ test cases  
+- ✅ Autenticación
+- ✅ Validación
+- ✅ JWT
+
+---
+
+## 🌐 Endpoints API
+
+### Autenticación (Público)
+```
+POST   /api/auth/login        - Obtener JWT
+GET    /api/auth/validate     - Validar token (protegido)
+```
+
+### Personal (Protegido)
+```
+GET    /api/personal          - Listar todos
+GET    /api/personal/:dni     - Por DNI
+POST   /api/personal          - Crear
+PUT    /api/personal/:dni     - Actualizar
+DELETE /api/personal/:dni     - Eliminar
+```
+
+### Asistencias (Protegido)
+```
+GET    /api/asistencias              - Listar todas
+GET    /api/asistencias?fecha=YYYY-MM-DD - Por fecha
+GET    /api/asistencias/reporte/:fecha   - Reporte
+GET    /api/asistencias/empleado/:dni    - Por empleado
+POST   /api/asistencias              - Registrar
+```
+
+---
+
+## 💰 Costos de Hosting Estimados
+
+### Opción 1: Todo en Uno (Recomendado)
+- **Railway.app o Render.com**
+- Frontend + Backend + BD: $5-15/mes
+- Anual: $60-180 USD
+
+### Opción 2: Separado
+- Vercel (Frontend): Gratis
+- Railway (Backend): $10/mes
+- BD PostgreSQL: $10/mes
+- Anual: ~$240 USD
+
+### Opción 3: Propio Servidor
+- DigitalOcean VPS: $4-6/mes
+- Mantenimiento: tu tiempo
+- Anual: ~$100 USD
+
+---
+
+## 🐛 Troubleshooting
+
+### Error de conexión a BD
+```bash
+# Verificar BD existe
+psql -l | grep sistema
+
+# Recrear BD
+dropdb sistema
+createdb sistema
+psql sistema -f backend/config/init.sql
+```
+
+### Puerto 3000/4000 ocupado
+```bash
+# Cambiar en .env
+PORT=5000
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+### Token expirado
+```bash
+# Frontend rechaza request → Redirige a login
+# Nuevo login genera nuevo token
+```
+
+---
+
+## 📞 Soporte
+
+- **Documentación:** Ver carpeta raíz
+- **Tests:** `npm test` en backend/
+- **Logs:** Verificar terminal del servidor
+
+---
+
+## 📝 Licencia
+
+Corporación R&L Service © 2024
+
+---
+
+## ✅ Checklist Pre-Producción
+
+- [ ] .env configurado con valores reales
+- [ ] JWT_SECRET generado (32+ chars)
+- [ ] Contraseña admin fuerte
+- [ ] Base de datos respaldada
+- [ ] Tests pasando (npm test)
+- [ ] HTTPS habilitado en dominio
+- [ ] CORS configurado para dominio real
+- [ ] Logs centralizados
+- [ ] Backups automáticos
+- [ ] Monitoreo de errores
+
+---
+
+**Última actualización:** 8 de febrero de 2026  
+**Versión:** 1.1.0 (Seguridad mejorada)
+

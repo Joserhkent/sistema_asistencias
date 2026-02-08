@@ -1,0 +1,13 @@
+                                      Tabla «public.asistencias»
+ Columna |          Tipo          | Ordenamiento | Nulable  |               Por omisión               
+---------+------------------------+--------------+----------+-----------------------------------------
+ id      | integer                |              | not null | nextval('asistencias_id_seq'::regclass)
+ dni     | character varying(8)   |              |          | 
+ tipo    | character varying(10)  |              |          | 
+ fecha   | date                   |              |          | 
+ hora    | time without time zone |              |          | 
+Índices:
+    "asistencias_pkey" PRIMARY KEY, btree (id)
+Restricciones de llave foránea:
+    "asistencias_dni_fkey" FOREIGN KEY (dni) REFERENCES personal(dni)
+
