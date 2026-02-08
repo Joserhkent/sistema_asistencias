@@ -1,4 +1,4 @@
-# 🏢 Sistema de Asistencias - Corporación R&L Service
+# 🏢 Sistema de Asistencias
 
 ## 📌 Descripción
 
