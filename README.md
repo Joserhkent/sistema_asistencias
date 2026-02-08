@@ -1,6 +1,6 @@
-# 🏢 Sistema de Asistencias
+#  Sistema de Asistencias
 
-## 📌 Descripción
+## Descripción
 
 Sistema web de control de asistencias para personal de empresa. Permite registrar entrada/salida, generar reportes y gestionar personal.
 
@@ -12,14 +12,14 @@ Sistema web de control de asistencias para personal de empresa. Permite registra
 
 ---
 
-## 🚀 Instalación Rápida
+## Instalación Rápida
 
-### 1️⃣ Requisitos
+### 1. Requisitos
 - Node.js 18+
 - PostgreSQL 12+
 - npm o yarn
 
-### 2️⃣ Clonar y configurar
+### 2.Clonar y configurar
 
 ```bash
 # Clonar repo
@@ -38,7 +38,7 @@ cp .env.example .env
 npm install
 ```
 
-### 3️⃣ Base de Datos
+### 3. Base de Datos
 
 ```bash
 # Crear base de datos
@@ -48,7 +48,7 @@ createdb sistema
 psql sistema -f backend/config/init.sql
 ```
 
-### 4️⃣ Iniciar servidores
+### 4. Iniciar servidores
 
 ```bash
 # Terminal 1: Backend (Puerto 4000)
