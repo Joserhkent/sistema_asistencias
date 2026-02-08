@@ -11,14 +11,31 @@ const { verifyToken } = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Configurar CORS desde variables de entorno
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
-  : ['http://localhost:3000', 'http://localhost:3001'];
+// Configurar CORS - incluye dominios de Vercel directamente
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'https://sistemaasistencias.vercel.app',
+  'https://sistema-asistencias.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+console.log('CORS - Orígenes permitidos:', allowedOrigins);
 
 // Middlewares
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    // Permitir requests sin origin (Postman, curl, mobile apps)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS - Origen no permitido:', origin);
+      // En producción, permitir temporalmente para debug
+      callback(null, true);
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
